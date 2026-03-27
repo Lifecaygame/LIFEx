@@ -84,30 +84,27 @@ minBtn.TextSize = 20
 Instance.new("UICorner", minBtn).CornerRadius = UDim.new(0, 5)
 minBtn.ZIndex = 50
 
--- PHẦN FIX: Tách riêng chữ Đơn
 local labelDonTitle = Instance.new("TextLabel", frame)
 labelDonTitle.Size = UDim2.new(0, 50, 0, 30)
-labelDonTitle.Position = UDim2.new(0, 12, 0, 10) -- Căn lề trái 12px
+labelDonTitle.Position = UDim2.new(0, 12, 0, 10)
 labelDonTitle.BackgroundTransparency = 1
 labelDonTitle.Text = "Đơn:"
 labelDonTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 labelDonTitle.Font = Enum.Font.SourceSansBold
 labelDonTitle.TextSize = 18
 labelDonTitle.TextXAlignment = Enum.TextXAlignment.Left
-labelDonTitle.ZIndex = 5
 
 local editDon = Instance.new("TextBox", frame)
 editDon.Size = UDim2.new(1, -95, 0, 30)
-editDon.Position = UDim2.new(0, 65, 0, 10) -- Đẩy sang phải để không đè chữ Đơn
+editDon.Position = UDim2.new(0, 65, 0, 10)
 editDon.BackgroundTransparency = 1
 editDon.Text = settings.don
-editDon.TextColor3 = Color3.fromRGB(255, 255, 255) -- Sáng trắng rực rỡ
+editDon.TextColor3 = Color3.fromRGB(255, 255, 255)
 editDon.Font = Enum.Font.SourceSansBold
 editDon.TextSize = settings.fontSize
 editDon.TextXAlignment = Enum.TextXAlignment.Left
 editDon.TextWrapped = true
 editDon.TextEditable = false
-editDon.ZIndex = 5
 
 local mainContent = Instance.new("Frame", frame)
 mainContent.Size = UDim2.new(1, 0, 0, 80)
@@ -120,6 +117,16 @@ labelTen.Text = "Tên: " .. (string.sub(LocalPlayer.Name, 1, 3) .. "####")
 labelTen.Font = Enum.Font.SourceSansBold
 labelTen.TextSize = 18
 labelTen.TextXAlignment = Enum.TextXAlignment.Left
+
+-- KHÔI PHỤC DÒNG BRANDING
+local branding = Instance.new("TextLabel", frame)
+branding.Size = UDim2.new(1, 0, 0, 20)
+branding.BackgroundTransparency = 1
+branding.Text = "BY TIKTOK LIFECAYGAME"
+branding.TextColor3 = Color3.fromRGB(180, 100, 255)
+branding.Font = Enum.Font.SourceSansBold
+branding.TextSize = 12
+branding.ZIndex = 5
 
 local btnContainer = Instance.new("Frame", mainContent)
 btnContainer.Size = UDim2.new(1, -30, 0, 32)
@@ -141,7 +148,7 @@ local function createBtn(text, color)
 end
 
 local editBtn = createBtn("Edit", Color3.fromRGB(45, 45, 45))
-local doneBtn = createBtn("Done", Color3.fromRGB(34, 139, 34))
+local doneBtn = createBtn("Done ✓", Color3.fromRGB(34, 139, 34))
 
 local protector = Instance.new("TextButton", frame)
 protector.BackgroundTransparency = 1
@@ -161,14 +168,16 @@ local function refreshLayout(noTween)
     editDon.Size = UDim2.new(1, -95, 0, finalEditHeight)
     if isMin then
         mainContent.Visible = false; minBtn.Text = "+"
-        local newSize = UDim2.new(0, 300, 0, finalEditHeight + 25)
+        branding.Position = UDim2.new(0, 0, 0, finalEditHeight + 15) -- Branding cho thu nhỏ
+        local newSize = UDim2.new(0, 300, 0, finalEditHeight + 45)
         if noTween then frame.Size = newSize else frame:TweenSize(newSize, "Out", "Quint", 0.3, true) end
         protector.Size = UDim2.new(1, 0, 1, 0)
     else
         mainContent.Visible = true; minBtn.Text = "-"
         labelTen.Position = UDim2.new(0, 15, 0, finalEditHeight + 15)
         btnContainer.Position = UDim2.new(0, 15, 0, finalEditHeight + 50)
-        local newSize = UDim2.new(0, 300, 0, finalEditHeight + 100)
+        branding.Position = UDim2.new(0, 0, 0, finalEditHeight + 90) -- Branding cho mở rộng
+        local newSize = UDim2.new(0, 300, 0, finalEditHeight + 120)
         if noTween then frame.Size = newSize else frame:TweenSize(newSize, "Out", "Quint", 0.3, true) end
         protector.Size = UDim2.new(1, 0, 0, finalEditHeight + 45)
     end
