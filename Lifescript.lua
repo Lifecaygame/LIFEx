@@ -141,7 +141,7 @@ local function createBtn(text, color)
 end
 
 local editBtn = createBtn("Edit", Color3.fromRGB(45, 45, 45))
-local doneBtn = createBtn("Done ✓", Color3.fromRGB(34, 139, 34))
+local doneBtn = createBtn("Done", Color3.fromRGB(34, 139, 34))
 
 local protector = Instance.new("TextButton", frame)
 protector.BackgroundTransparency = 1
